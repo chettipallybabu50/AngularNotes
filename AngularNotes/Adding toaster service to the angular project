@@ -1,0 +1,81 @@
+step.1-->The first step is it is important to install necessary packages
+
+       npm install ngx-toastr --save
+       npm install @angular/animations --save
+
+Note:After installing the above two packages we need follow the following steps 
+**we can add toaster service in 2 methods.here I will explain the method1**
+
+Step.2 -->> In angular project --> In the "style.css" file  add the below one at the top (that means at 1st line)
+
+       @import 'ngx-toastr/toastr';
+
+step.3-->>In "app.module.ts" file import theses two  1.BrowserAnimationsModule  and 2.ToastrModule like below 
+
+       import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+       import { ToastrModule } from 'ngx-toastr';
+
+       and also in @NgModule imports like below 
+
+       @NgModule({
+         imports: [ 
+            BrowserAnimationsModule, -->> like this 
+            ToastrModule.forRoot(),  -->>
+            ],
+step.4-->After above 3 steps you have to import the toasteservice in which component you want to use the toaster service 
+         in your angular application
+         ** like below we need to do for working of a toaster
+
+         import { ToastrService } from 'ngx-toastr';      *** like this need to import ***
+         @Component({...})
+         export class YourComponent {
+         constructor(private toastr: ToastrService) {}    *** important to define it is in the constractor to use ***
+
+         showSuccess() {
+          this.toastr.success('Hello world!', 'Toastr fun!');   *** like this we use the toaster service to display the messages***
+         }
+         }
+
+NOTE: After following the above steps the toaster will work. but may get problem like not able display the message in the center of the 
+      Screen. to resolve it follow the below steps.
+
+Step.1-->> In "app.module.ts" we need to right like below. the toaster service has lot of properties like we can define time to display 
+            the message (how much time it should display)
+
+          ToastrModule.forRoot({
+           preventDuplicates: true,   *** it prevents to display the message multiple time ***
+           positionClass:'toast-top-center' *** by using this we set the position to display the message ***
+         })
+NOTE: generally by using the above one it will display the message our desired position. if it is not working for the to display it on the 
+      top-center.then follow the bellow one.
+
+step1.1 In the "style.css"  file add this code  this will work .it display the message top to the center of the screen 
+
+                             .toast-top-center {
+                              top: 12px;
+                              right: 0;
+                              bottom: auto;
+                              left: 50%;
+                              transform: translateX(-50%);
+                              -webkit-transform: translateX(-50%);
+                              -moz-transform: translateX(-50%);
+                              -ms-transform: translateX(-50%);
+                              -o-transform: translateX(-50%);
+                              }
+
+
+******* below one is the reference link how to use the toaster service in angular In which they provided step bystep process to use 
+               toaster service ********
+
+        Link: https://www.npmjs.com/package/ngx-toastr
+       
+
+------------------------------>>>>>>>>>>>>>>>>>>>          END          <<<<<<<<<<<<<<<<<<-----------------------------------       
+
+
+
+
+
+
+
+
